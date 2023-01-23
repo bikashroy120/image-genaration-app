@@ -2,7 +2,8 @@ import React,{useState,useEffect} from 'react'
 import Card from '../components/Card';
 import FormFiled from '../components/FormField'
 import Loader from '../components/Loader';
-import FaPen from "react-icons/fa";
+import {FaPen,FaImages} from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const RenderCards = ({ data, title }) => {
     if (data?.length > 0) {
@@ -22,6 +23,32 @@ const Home = () => {
     const [searchText,setSearchText] = useState("")
     const [searchTimeout, setSearchTimeout] = useState(null);
     const [searchedResults, setSearchedResults] = useState(null);
+    const navigate = useNavigate()
+
+    const navData = [
+      {
+        icon:<FaPen />,
+        title:"Text completion",
+        sub:"Generate and edit text",
+        link:"/text",
+        bg:'#ef4146'
+      },
+      {
+        icon:<FaImages />,
+        title:"Image generationBeta",
+        sub:"Generate and edit images",
+        link:"/creact-post",
+        bg:"#dd5ce5",
+      },
+      {
+        icon:<FaPen />,
+        title:"Ad from product description",
+        sub:"Turn a product description into ad copy.",
+        link:"/product",
+        bg:"#5436da",
+      },
+    ]
+
 
     const fetchPosts = async () => {
       setLoading(true);
@@ -61,6 +88,10 @@ const Home = () => {
       );
     };
 
+    const RouterHandeler = (link)=>{
+      navigate(link);
+    }
+
   return (
     <section className='max-w-7xl mx-auto'>
         <div>
@@ -72,12 +103,20 @@ const Home = () => {
             <p>Explore what's possible with some example applications</p>
         </div>
 
-      <div>
-          <div>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-10'>
+        {navData.map((item,index)=>{
+          return(
+            <div key={index} onClick={()=>RouterHandeler(item.link)} className="bg-[#eeeeee] hover:shadow-md cursor-pointer  py-3 px-5 flex items-center gap-3 rounded-md">
+            <div className={`w-[70px] text-white text-[25px] flex items-center justify-center rounded-md h-[70px]`} style={{background:`${item.bg}`}}>
+                {item.icon}
+            </div>
             <div>
-                <FaPen />
+              <h2 className='text-[18px] font-semibold'>{item.title}</h2>
+              <p>{item.sub}</p>
             </div>
           </div>
+          )
+        })}
       </div>
 
         <div className='mt-16'>
