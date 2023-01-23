@@ -46,3 +46,12 @@ export const surpriseMePrompts = [
     'A man wanders through the rainy streets of Tokyo, with bright neon signs, 50mm',
     'A Space Shuttle flying above Cape Town, digital art',
   ];
+
+  export const productPrompts = [
+    'HP 15s-du3611TU Core i3 11th Gen 15.6" FHD Laptop',
+    'Dell Inspiron 15 3511 Core i3 11th Gen 256GB SSD 15.6" FHD Laptop',
+    'GIGABYTE G5 GD Core i5 11th Gen RTX 3050 4GB Graphics 15.6" FHD Gaming Laptop',
+    'Vivo Y16',
+    'Infinix Note 12 Pro',
+    'OnePlus Nord 2T 5G',
+  ]

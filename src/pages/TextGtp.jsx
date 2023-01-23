@@ -16,8 +16,8 @@ const CreactPost = () => {
     const [form, setForm] = useState({
       prompt: '',
     });
-    console.log(data)
-    const [generatingImg, setGeneratingImg] = useState(false);
+
+
     const [loading, setLoading] = useState(false);
   
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -32,10 +32,10 @@ const CreactPost = () => {
         setLoading(true)
         axios.post("http://localhost:8080/api/v1/dalle/text",{prompt: form.prompt})
         .then((res)=>{
-          console.log(res.data.bot)
-          setData([...data,{first:prompt,last:res.data.bot}])
+          console.log(res.data.bot.trim())
+          setData([{first:form.prompt,last:res.data.bot},...data])
           setLoading(false)
-          typeText(res.data.bot)
+          // typeText(res.data.bot.trim())
         })
         setprompt("")
       } else {
@@ -70,18 +70,18 @@ const CreactPost = () => {
     //   }
     // };
 
-    function typeText(text) {
-      let index = 0
+  //   function typeText(text) {
+  //     let index = 0
   
-      let interval = setInterval(() => {
-          if (index < text.length) {
-              document.getElementById('pp').innerHTML += text.charAt(index)
-              index++
-          } else {
-              clearInterval(interval)
-          }
-      }, 20)
-  }
+  //     let interval = setInterval(() => {
+  //         if (index < text.length) {
+  //             document.getElementById('pp').innerHTML += text.charAt(index)
+  //             index++
+  //         } else {
+  //             clearInterval(interval)
+  //         }
+  //     }, 20)
+  // }
 
 
   return (
@@ -91,7 +91,7 @@ const CreactPost = () => {
         <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px]">Generate and edit text</p>
       </div>
 
-      <form className="mt-7 max-w-3xl" onSubmit={handleSubmit}>
+      <form className="mt-7" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
           <FormField
             labelName="Prompt"
@@ -125,31 +125,7 @@ const CreactPost = () => {
         </div> */}
 
       <div>
-        {
-        data && data.map((item,i)=>{
-            return(
-              <div className=' text-white' key={i}>
-                <div className=' py-5 px-10'>
-                  <div className='flex items-center gap-3 max-w-[700px] mx-auto'>
-                    <img src={user} alt="" className='w-[40px]'  />
-                    <h2>{item.first}</h2>
-                  </div>
-                </div>
-                <div className=' mt-3 py-5 bg-[#444654] px-10'>
-                    <div className='flex items-start gap-3 max-w-[700px] mx-auto'>
-                      <div className='w-[7%]'>
-                      <img src={bot} alt="" className='w-[40px]' />
-                      </div>
-                      <div className='w-[90%]'>
-                        <h4 id='pp'></h4>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            )
-          })
-        }
-                          {
+      {
       loading ? (<div className='flex items-center justify-center mt-3'>
         <Bars
           height="50"
@@ -159,9 +135,34 @@ const CreactPost = () => {
           wrapperStyle={{}}
           wrapperClass=""
           visible={true}
-/>
+        />
       </div>):(null)
     }
+        {
+        data && data.map((item,i)=>{
+            return(
+              <div className='pt-3 text-white' key={i}>
+                <div className='pt-3 bg-slate-400'>
+                  <div className='flex items-center gap-3 max-w-[700px] mx-auto p-4'>
+                    <img src={user} alt="" className='w-[40px]'  />
+                    <h2>{item.first}</h2>
+                  </div>
+                </div>
+                <div className='py-5 bg-[#45464a] px-10'>
+                    <div className='flex items-start gap-3 max-w-[700px] mx-auto'>
+                      <div className='md:w-[90%] ' >
+
+                        <div
+                        contentEditable={true}
+                            dangerouslySetInnerHTML={{__html: item.last.replaceAll("\n", "<br/>")}}
+                          />
+                      </div>
+                    </div>
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
 
       </form>
