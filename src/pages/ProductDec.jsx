@@ -35,55 +35,12 @@ const CreactPost = () => {
           console.log(res.data.bot.trim())
           setData([{first:form.prompt,last:res.data.bot},...data])
           setLoading(false)
-          // typeText(res.data.bot.trim())
         })
         setprompt("")
       } else {
         alert('Please provide proper prompt');
       }
     };
-
-    // const handleSubmit = async (e) => {
-    //   e.preventDefault();
-  
-    //   if (form.prompt && form.photo) {
-    //     setLoading(true);
-    //     try {
-    //       const response = await fetch('http://localhost:8080/api/v1/post', {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ ...form }),
-    //       });
-  
-    //       await response.json();
-    //       alert('Success');
-    //       navigate('/');
-    //     } catch (err) {
-    //       alert(err);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   } else {
-    //     alert('Please generate an image with proper details');
-    //   }
-    // };
-
-  //   function typeText(text) {
-  //     let index = 0
-  
-  //     let interval = setInterval(() => {
-  //         if (index < text.length) {
-  //             document.getElementById('pp').innerHTML += text.charAt(index)
-  //             index++
-  //         } else {
-  //             clearInterval(interval)
-  //         }
-  //     }, 20)
-  // }
-
-
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -113,17 +70,6 @@ const CreactPost = () => {
             {loading ? 'Generating...' : 'Generate'}
           </button>
         </div>
-
-        {/* <div className="mt-10">
-          <p className="mt-2 text-[#666e75] text-[14px]">** Once you have created the image you want, you can share it with others in the community **</p>
-          <button
-            type="submit"
-            className="mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-          >
-            {loading ? 'Sharing...' : 'Share with the Community'}
-          </button>
-        </div> */}
-
       <div>
       {
       loading ? (<div className='flex items-center justify-center mt-3'>

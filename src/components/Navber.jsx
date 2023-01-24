@@ -8,7 +8,7 @@ const Navber = () => {
     <Link to={"/"}>
       <img src={logo} alt="" className="w-20 object-contain" />
     </Link>
-    <div className='flex items-center gap-3'>
+    <div className='md:flex items-center gap-3 hidden '>
     <Link to={"/creact-post"} className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md">
       Create
     </Link>

@@ -95,7 +95,7 @@ const Home = () => {
   return (
     <section className='max-w-7xl mx-auto'>
         <div>
-            <h1 className=' font-extrabold text-[#222328] text-[42px]'>TechDSF Global Branding Development & Cyber Security Solutions Company</h1>
+            <h1 className=' font-extrabold text-[#222328] text-[20px] md:text-[42px]'>TechDSF Global Branding Development & Cyber Security Solutions Company</h1>
             <p className='mt-2 text-[#666e75] text-[16px]'>Welcome to Techdsf Software Company Bangladesh, one of the best software companies in Bangladesh. Tech DSF was founded in 2020. Now it is the largest software company in North Bengal. After successfully delivering many web & mobile applications, Tech DSF is now aimed to outsource skilled resources to fulfill any IT needs.</p>
         </div>
         <div className=' text-center mt-8'>
@@ -111,8 +111,8 @@ const Home = () => {
                 {item.icon}
             </div>
             <div>
-              <h2 className='text-[18px] font-semibold'>{item.title}</h2>
-              <p>{item.sub}</p>
+              <h2 className='text-[16px] md:text-[18px] font-semibold'>{item.title}</h2>
+              <p className='text-[14px] md:text-[16px]'>{item.sub}</p>
             </div>
           </div>
           )
