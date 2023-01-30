@@ -47,6 +47,20 @@ const Home = () => {
         link:"/product",
         bg:"#5436da",
       },
+      {
+        icon:<FaPen />,
+        title:"English to other languages",
+        sub:"Translates English text into French, Spanish and Japanese.",
+        link:"/translates",
+        bg:"#33C591",
+      },
+      {
+        icon:<FaPen />,
+        title:"Interview questions",
+        sub:"Create interview questions.",
+        link:"/interview",
+        bg:"#1DBE84",
+      },
     ]
 
 
@@ -107,12 +121,12 @@ const Home = () => {
         {navData.map((item,index)=>{
           return(
             <div key={index} onClick={()=>RouterHandeler(item.link)} className="bg-[#eeeeee] hover:shadow-md cursor-pointer  py-3 px-5 flex items-center gap-3 rounded-md">
-            <div className={`w-[70px] text-white text-[25px] flex items-center justify-center rounded-md h-[70px]`} style={{background:`${item.bg}`}}>
+            <div className={`w-[18%] text-white text-[25px] flex items-center justify-center rounded-md h-[70px]`} style={{background:`${item.bg}`}}>
                 {item.icon}
             </div>
-            <div>
+            <div className='w-[75%]'>
               <h2 className='text-[16px] md:text-[18px] font-semibold'>{item.title}</h2>
-              <p className='text-[14px] md:text-[16px]'>{item.sub}</p>
+              <p className='text-[14px] md:text-[16px]'>{item.sub.slice(0,35)} {item.sub.length>35 ? "..." : ""}</p>
             </div>
           </div>
           )

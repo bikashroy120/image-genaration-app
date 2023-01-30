@@ -2,8 +2,10 @@ import {BrowserRouter,Routes,Route,Link} from "react-router-dom"
 import Navber from "./components/Navber"
 import CreactPost from "./pages/CreactPost"
 import Home from "./pages/Home"
+import Interview from "./pages/Interview"
 import ProductDec from "./pages/ProductDec"
 import TextGtp from "./pages/TextGTP"
+import Translates from "./pages/Translates"
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
             <Route path="/creact-post" element={<CreactPost />} />
             <Route path="/product" element={<ProductDec />} />
             <Route path="/text" element={<TextGtp />} />
+            <Route path="/translates" element={<Translates />} />
+            <Route path="/interview" element={<Interview />} />
         </Routes>
       </main>
     </BrowserRouter>

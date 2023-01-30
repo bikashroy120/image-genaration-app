@@ -55,3 +55,11 @@ export const surpriseMePrompts = [
     'Infinix Note 12 Pro',
     'OnePlus Nord 2T 5G',
   ]
+
+
+  export const quePrompts = [
+    '10 questions about Bangladesh',
+    '10 questions about science',
+    '10 questions about sports',
+    'Create a list of 8 questions for my interview with a science fiction author:'
+  ]
