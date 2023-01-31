@@ -52,7 +52,7 @@ const Home = () => {
         title:"English to other languages",
         sub:"Translates English text into French, Spanish and Japanese.",
         link:"/translates",
-        bg:"#33C591",
+        bg:"#F15459",
       },
       {
         icon:<FaPen />,
@@ -60,6 +60,13 @@ const Home = () => {
         sub:"Create interview questions.",
         link:"/interview",
         bg:"#1DBE84",
+      },
+      {
+        icon:<FaPen />,
+        title:"Recipe creator (eat at your own risk)",
+        sub:"Create a recipe from a list of ingredients.",
+        link:"/recipe",
+        bg:"#7840DD",
       },
     ]
 

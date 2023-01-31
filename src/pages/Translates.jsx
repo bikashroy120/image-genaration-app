@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Bars } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { preview } from '../assets';
@@ -9,14 +9,80 @@ import user from "../assets/user.svg"
 import bot from "../assets/bot.svg"
 import axios from 'axios';
 import Select from 'react-select';
+import {AiFillSound} from "react-icons/ai"
 
 const Translates = () => {
     const navigate = useNavigate();
       const [prompt,setprompt] = useState('')
       const [data,setData] = useState([])
+      const [voice, setVoice] = useState(null);
+      const [loading, setLoading] = useState(false);
+      const [selectedOption, setSelectedOption] = useState("");
+      const [voices, setVoices] = useState([]);
+      const [isPlaying, setIsPlaying] = useState(false);
     const [form, setForm] = useState({
       prompt: '',
     });
+
+    const pppp = [
+      {
+        title:'English',
+        lang:"en-GB",
+      },
+      {
+        title:"Español",
+        lang:"es-ES",
+      },
+      {
+        title:"French",
+        lang:"fr-FR",
+      },
+      {
+        title:"Hindi",
+        lang:"hi-IN",
+      },
+    ]
+
+    const dddd = {   default:false,
+        lang:"en-GB",
+        localService:false,
+        name:"Google UK English Female",
+        voiceURI:"Google UK English Female", }
+  
+
+    const datasss = [
+      {   default:false,
+          lang:"en-GB",
+          localService:false,
+          name:"Google UK English Female",
+          voiceURI:"Google UK English Female",
+      },
+      {   default:false,
+          lang:"es-ES",
+          localService:false,
+          name:"Google español",
+          voiceURI:"Google español",
+      },
+      {   default:false,
+          lang:"fr-FR",
+          localService:false,
+          name:"Google français",
+          voiceURI:"Google français",
+      },
+      {   default:false,
+          lang:"hi-IN",
+          localService:false,
+          name:"Google हिन्दी",
+          voiceURI:"Google हिन्दी",
+      },
+      // {   default:false,
+      //     lang:"bn-BN",
+      //     localService:false,
+      //     name:"Google Bengali",
+      //     voiceURI:"Google Bengali",
+      //     title:"Bangla"
+      // },
+    ]
 
     const options = [
         { value: 'Afrikaans', label: 'Afrikaans' },
@@ -53,15 +119,20 @@ const Translates = () => {
         { value: 'Hindi', label: 'Hindi' },
       ];
 
-
-
-
-    const [loading, setLoading] = useState(false);
-    const [selectedOption, setSelectedOption] = useState("");
+      useEffect(() => {
+        window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
+        return () => {
+          window.speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
+        };
+      }, []);
+    
+      const handleVoicesChanged = () => {
+        setVoices(window.speechSynthesis.getVoices());
+      };
   
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    
+    console.log(voice)
       
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -79,6 +150,20 @@ const Translates = () => {
         alert('Please provide proper prompt');
       }
     };
+
+    const handleSpeak = (text) => {
+      setIsPlaying(true);
+      console.log(voice)
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = dddd;
+      window.speechSynthesis.speak(utterance);
+      utterance.addEventListener('end', handleSpeakEnd);
+    };
+  
+    const handleSpeakEnd = () => {
+      setIsPlaying(false);
+    };
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -93,7 +178,7 @@ const Translates = () => {
             <select  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#6469ff] focus:border-[#6469ff] outline-none block w-full p-3" name="cars" id="cars" value={selectedOption} onChange={(e)=>setSelectedOption(e.target.value)}>
               {options.map((item,i)=>{
                 return(
-                  <option key={i} value={item.value}>{item.label}</option>
+                  <option key={i} value={item.label}>{item.label}</option>
                 )
               })}
             </select>
@@ -149,6 +234,9 @@ const Translates = () => {
                             dangerouslySetInnerHTML={{__html: item.last.replaceAll("\n", "<br/>")}}
                           />
                       </div>
+                    </div>
+                    <div className='text-[25px]'>
+                      <AiFillSound onClick={()=>handleSpeak(item.last.replaceAll("\n", " "))}/>
                     </div>
                 </div>
               </div>
