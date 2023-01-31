@@ -13,111 +13,71 @@ import {AiFillSound} from "react-icons/ai"
 
 const Translates = () => {
     const navigate = useNavigate();
-      const [prompt,setprompt] = useState('')
+      const [prompt,setprompt] = useState()
       const [data,setData] = useState([])
       const [voice, setVoice] = useState(null);
       const [loading, setLoading] = useState(false);
-      const [selectedOption, setSelectedOption] = useState("");
+      const [selectedOption, setSelectedOption] = useState();
       const [voices, setVoices] = useState([]);
       const [isPlaying, setIsPlaying] = useState(false);
     const [form, setForm] = useState({
       prompt: '',
     });
 
-    const pppp = [
-      {
-        title:'English',
-        lang:"en-GB",
-      },
-      {
-        title:"Español",
-        lang:"es-ES",
-      },
-      {
-        title:"French",
-        lang:"fr-FR",
-      },
-      {
-        title:"Hindi",
-        lang:"hi-IN",
-      },
-    ]
-
-    const dddd = {   default:false,
-        lang:"en-GB",
-        localService:false,
-        name:"Google UK English Female",
-        voiceURI:"Google UK English Female", }
-  
-
-    const datasss = [
-      {   default:false,
-          lang:"en-GB",
-          localService:false,
-          name:"Google UK English Female",
-          voiceURI:"Google UK English Female",
-      },
-      {   default:false,
-          lang:"es-ES",
-          localService:false,
-          name:"Google español",
-          voiceURI:"Google español",
-      },
-      {   default:false,
-          lang:"fr-FR",
-          localService:false,
-          name:"Google français",
-          voiceURI:"Google français",
-      },
-      {   default:false,
-          lang:"hi-IN",
-          localService:false,
-          name:"Google हिन्दी",
-          voiceURI:"Google हिन्दी",
-      },
-      // {   default:false,
-      //     lang:"bn-BN",
-      //     localService:false,
-      //     name:"Google Bengali",
-      //     voiceURI:"Google Bengali",
-      //     title:"Bangla"
-      // },
-    ]
+    // const pppp = [
+    //   {
+    //     title:'English',
+    //     lang:"en-GB",
+    //   },
+    //   {
+    //     title:"Español",
+    //     lang:"es-ES",
+    //   },
+    //   {
+    //     title:"French",
+    //     lang:"fr-FR",
+    //   },
+    //   {
+    //     title:"Hindi",
+    //     lang:"hi-IN",
+    //   },
+    // ]
 
     const options = [
-        { value: 'Afrikaans', label: 'Afrikaans' },
-        { value: 'Akan', label: 'Akan' },
-        { value: 'Albanian', label: 'Albanian' },
-        { value: 'Amharic', label: 'Amharic' },
-        { value: 'Arabic', label: 'Arabic' },
-        { value: 'Armenian', label: 'Armenian' },
-        { value: 'Assamese', label: 'Assamese' },
-        { value: 'Aymara', label: 'Aymara' },
-        { value: 'Azerbaijani', label: 'Azerbaijani' },
-        { value: 'Bambara', label: 'Bambara' },
-        { value: 'Bangla', label: 'Bangla' },
-        { value: 'Basque', label: 'Basque' },
-        { value: 'Belarusian', label: 'Belarusian' },
-        { value: 'Bhojpuri', label: 'Bhojpuri' },
-        { value: 'Bosnian', label: 'Bosnian' },
-        { value: 'Bulgarian', label: 'Bulgarian' },
-        { value: 'Burmese', label: 'Burmese' },
-        { value: 'Catalan', label: 'Catalan' },
-        { value: 'Cebuano', label: 'Cebuano' },
-        { value: 'Corsican', label: 'Corsican' },
-        { value: 'Croatian', label: 'Croatian' },
-        { value: 'Czech', label: 'Czech' },
-        { value: 'Danish', label: 'Danish' },
-        { value: 'Divehi', label: 'Divehi' },
-        { value: 'Dogri', label: 'Dogri' },
-        { value: 'English', label: 'English' },
-        { value: 'Esperanto', label: 'Esperanto' },
-        { value: 'Finnish', label: 'Finnish' },
-        { value: 'French', label: 'French' },
-        { value: 'Guarani', label: 'Guarani' },
-        { value: 'Nepali', label: 'Nepali' },
-        { value: 'Hindi', label: 'Hindi' },
-      ];
+      { value: 'Afrikaans', label: 'Afrikaans' },
+      { value: 'Akan', label: 'Akan' },
+      { value: 'Albanian', label: 'Albanian' },
+      { value: 'Amharic', label: 'Amharic' },
+      { value: 'Arabic', label: 'Arabic' },
+      { value: 'Armenian', label: 'Armenian' },
+      { value: 'Assamese', label: 'Assamese' },
+      { value: 'Aymara', label: 'Aymara' },
+      { value: 'Azerbaijani', label: 'Azerbaijani' },
+      { value: 'Bambara', label: 'Bambara' },
+      { value: 'Bangla', label: 'Bangla' },
+      { value: 'Basque', label: 'Basque' },
+      { value: 'Belarusian', label: 'Belarusian' },
+      { value: 'Bhojpuri', label: 'Bhojpuri' },
+      { value: 'Bosnian', label: 'Bosnian' },
+      { value: 'Bulgarian', label: 'Bulgarian' },
+      { value: 'Burmese', label: 'Burmese' },
+      { value: 'Catalan', label: 'Catalan' },
+      { value: 'Cebuano', label: 'Cebuano' },
+      { value: 'Corsican', label: 'Corsican' },
+      { value: 'Croatian', label: 'Croatian' },
+      { value: 'Czech', label: 'Czech' },
+      { value: 'Danish', label: 'Danish' },
+      { value: 'Divehi', label: 'Divehi' },
+      { value: 'Dogri', label: 'Dogri' },
+      { value: 'English', label: 'English' },
+      { value: 'Esperanto', label: 'Esperanto' },
+      { value: 'Finnish', label: 'Finnish' },
+      { value: 'French', label: 'French' },
+      { value: 'Guarani', label: 'Guarani' },
+      { value: 'Nepali', label: 'Nepali' },
+      { value: 'Hindi', label: 'Hindi' },
+    ];
+    
 
       useEffect(() => {
         window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
@@ -132,7 +92,10 @@ const Translates = () => {
   
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    console.log(voice)
+    useEffect(()=>{
+
+    },[])
+    console.log(voices)
       
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -153,9 +116,8 @@ const Translates = () => {
 
     const handleSpeak = (text) => {
       setIsPlaying(true);
-      console.log(voice)
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.voice = dddd;
+      utterance.voice = voices[5];
       window.speechSynthesis.speak(utterance);
       utterance.addEventListener('end', handleSpeakEnd);
     };
@@ -236,7 +198,7 @@ const Translates = () => {
                       </div>
                     </div>
                     <div className='text-[25px]'>
-                      <AiFillSound onClick={()=>handleSpeak(item.last.replaceAll("\n", " "))}/>
+                      <AiFillSound className={`${isPlaying ? " text-gray-500" : ""}`} onClick={()=>handleSpeak(item.last.replaceAll("\n", " "))}/>
                     </div>
                 </div>
               </div>
